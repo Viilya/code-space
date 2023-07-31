@@ -1,4 +1,4 @@
-package com.ssafy.algorithmstudy.bj;
+package com.ssafy.algorithmstudy.boj.boj1592;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

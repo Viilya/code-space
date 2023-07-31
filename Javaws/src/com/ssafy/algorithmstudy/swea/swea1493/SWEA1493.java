@@ -1,4 +1,4 @@
-package com.ssafy.algorithmstudy.swea;
+package com.ssafy.algorithmstudy.swea.swea1493;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 public class SWEA1493 {
     public static void main(String args[]) throws IOException {
-        System.setIn(new FileInputStream("SWEA1493i.txt"));
+        //System.setIn(new FileInputStream("SWEA1493i.txt"));
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
 

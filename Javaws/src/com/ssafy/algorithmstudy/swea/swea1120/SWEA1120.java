@@ -1,4 +1,4 @@
-package com.ssafy.algorithmstudy.swea;
+package com.ssafy.algorithmstudy.swea.swea1120;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 /**
  * 1 : N, 2 : S / Up : N , Down : S
  */
-public class SwEA1120 {
+public class SWEA1120 {
     public static void checkFallingMagnets(int[][] map, int n) {
         for (int s = 0; s < n; s++) {
             boolean foundN = false;
