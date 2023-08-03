@@ -5,9 +5,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-
 
 public class boj2023_anotherSolves {
     public static boolean[] isNotPrime;
@@ -76,7 +73,8 @@ public class boj2023_anotherSolves {
                 return false;
             return true;
         }
-        for (int k = 2; k < len; k++) {
+        double tmp = Math.sqrt(num);
+        for (int k = 2; k < tmp; k++) {
             if (isNotPrime[k] == false && num % k == 0)
                 return false;
         }
