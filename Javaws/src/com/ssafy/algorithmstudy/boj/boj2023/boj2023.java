@@ -1,23 +1,31 @@
 package com.ssafy.algorithmstudy.boj.boj2023;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class boj2023 {
-    boolean[] primes = new boolean[10000];
-    public static void main(String args[]) {
-
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static BufferedReader br;
+    public static BufferedWriter bw;
+    public static void main(String args[]) throws NumberFormatException, IOException {
+        br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int n = Integer.parseInt(br.readLine());
         int numbers[] = new int[n];
         getDigits(0, n, numbers);
+        bw.flush();
+        bw.close();
+        br.close();
     }
 
-    public static void getDigits(int currDigit, int n, int numbers[]) {
+    public static void getDigits(int currDigit, int n, int numbers[]) throws IOException {
         if(currDigit == n){
             for(int k = 0 ; k < n; k ++){
-                System.out.print(numbers[k]);
+                bw.write(String.valueOf(numbers[k]));
             }
-            System.out.println();
+            bw.newLine();
             return;
         }
         int num = 0;
