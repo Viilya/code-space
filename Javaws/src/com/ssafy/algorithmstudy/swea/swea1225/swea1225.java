@@ -70,6 +70,7 @@ public class swea1225 {
             int number = dq.pollFirst() - k;
             // 뺀 숫자가 0 보다 작은 경우 
             if (number <= 0) {
+                // 0을 마지막에 추가
                 dq.addLast(0);
                 return true;
             }
