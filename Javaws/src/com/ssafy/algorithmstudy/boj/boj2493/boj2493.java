@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 public class boj2493 {
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,12 +23,21 @@ public class boj2493 {
     
     public static void main(String args[]) throws IOException {
         input();
+        // for (int k = 0; k < n; k++) {
+// 
+            // System.out.print(res[k] + " ");
+        // }
+        // System.out.println(Arrays.stream(res).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
+        // System.out.println();
         for (int k = 0; k < n; k++) {
-            System.out.print(res[k] + " ");
+            bw.write(String.valueOf(res[k]) + " ");
         }
-        System.out.println();
+        bw.newLine();
+        bw.flush();
+        bw.close();
+        br.close();
     }
-    public static void input() throws NumberFormatException, IOException {
+    public static void input() throws IOException {
         n = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
         line = new int[n];
