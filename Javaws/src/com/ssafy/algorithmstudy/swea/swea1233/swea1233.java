@@ -26,10 +26,10 @@ public class swea1233 {
                 int node = Integer.parseInt(st.nextToken());
                 String str = st.nextToken();
                 if (str.charAt(0) >= '0' && str.charAt(0) <= '9'
-                        && st.hasMoreTokens()) {
+                        && st.hasMoreTokens()) 
                     result = 0;
+                // if (str.charAt(0) )
                 }
-            }
             printRes(test_case, result);
         }
         
