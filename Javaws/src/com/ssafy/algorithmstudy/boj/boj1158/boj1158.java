@@ -31,16 +31,15 @@ public class boj1158 {
     public static void makeNumList() {
         for (int k = 1; k <= N; k++) {
             dq.addLast(k);
+            
         }
     }
 
     public static void Josephus() {
         while (true) {
             for (int k = 0; k < K - 1; k++) {
-                int tmp = dq.pollFirst();
-                dq.addLast(tmp);
+                res.addLast(dq.pollFirst());
             }
-            res.addLast(dq.pollFirst());
             if(dq.isEmpty())
                 break;
         }
