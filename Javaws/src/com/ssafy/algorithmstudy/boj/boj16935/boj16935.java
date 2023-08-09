@@ -30,14 +30,13 @@ public class boj16935 {
      * 1
      */
     public static void reverseUpDown() {
-        int[][] upMap = new int[N / 2][M];
-        int[][] downMap = new int[N / 2][M];
-        for (int k = 0; k < N/2; k++) {
-            upMap[k] = Arrays.copyOf(map[k], M);
-            downMap[k] = Arrays.copyOf(map[N - k - 1], M);
-            map[k] = Arrays.copyOf(downMap[k], M);
-            map[N - k - 1] = Arrays.copyOf(upMap[k], M);
-
+        // 
+        int[] upMap = new int[M];// tmp line
+        for (int k = 0; k < N / 2; k++) {
+            // 한줄 미리 저장 후 위 아래 바꾸기
+            upMap = Arrays.copyOf(map[k], M);
+            map[k] = Arrays.copyOf(map[N - k - 1], M);
+            map[N - k - 1] = Arrays.copyOf(upMap, M);
         }
     }
 
@@ -45,6 +44,7 @@ public class boj16935 {
      * 2
      */
     public static void reverseLeftRight() {
+        // 한 줄 마다 좌 우 바꾸기
         for (int k = 0; k < N; k++) {
             for (int s = 0; s < M/2; s++) {
                 int tmp = map[k][s];
@@ -58,6 +58,7 @@ public class boj16935 {
      * 3
      */
     public static void rotateRight() {
+        // 새로 M, N 만든 후에 map에 숫자들을 오른쪽으로 돌려 새로 만든 배열에 저장후 다시 선언해서 데이터 저장 
         int[][] rRMap = new int[M][N];
         for (int k = 0; k < N; k++) {
             for (int s = 0; s < M; s++) {
@@ -77,6 +78,7 @@ public class boj16935 {
      * 4
      */
     public static void rotateLeft() {
+        // 새로 M, N 만든 후에 map에 숫자들을 왼쪽으로 돌려 새로 만든 배열에 저장후 다시 선언해서 데이터 저장 
         int[][] lRMap = new int[M][N];
         for (int k = 0; k < N; k++) {
             for (int s = 0; s < M; s++) {
@@ -96,21 +98,15 @@ public class boj16935 {
      * 5
      */
     public static void divideAndRotateRight() {
-        int[][] map01 = new int[N / 2][M / 2];
-        int[][] map02 = new int[N / 2][M / 2];
-        int[][] map03 = new int[N / 2][M / 2];
-        int[][] map04 = new int[N / 2][M / 2];
+        // 전체 맵을 4 등분 한 후에 오른쪽으로 돌려서 다시 저장
+        int[]map01 = new int[M / 2];
         for (int k = 0; k < N/2; k++) {
-            map01[k] = Arrays.copyOfRange(map[k], 0, M / 2);
-            map02[k] = Arrays.copyOfRange(map[k], M/2, M);
-            map03[k] = Arrays.copyOfRange(map[k + N/2], M / 2, M);
-            map04[k] = Arrays.copyOfRange(map[k + N/2], 0, M / 2);
-            
+            map01 = Arrays.copyOfRange(map[k], 0, M / 2);
             for (int s = 0; s < M / 2; s++) {
-                map[k][s] = map04[k][s];
-                map[k][s + M / 2] = map01[k][s];
-                map[k + N / 2][s] = map03[k][s];
-                map[k + N / 2][s + M / 2] = map02[k][s];
+                map[k][s] = map[k+N/2][s];
+                map[k+N/2][s] = map[k+N/2][s+M/2];
+                map[k + N / 2][s + M / 2] = map[k][s+M/2];
+                map[k][s + M / 2] = map01[s];
             }
         }
     }
@@ -119,27 +115,21 @@ public class boj16935 {
      * 6
      */
     public static void divideAndRotateLeft() {
-        int[][] map01 = new int[N / 2][M / 2];
-        int[][] map02 = new int[N / 2][M / 2];
-        int[][] map03 = new int[N / 2][M / 2];
-        int[][] map04 = new int[N / 2][M / 2];
+        // 전체 맵을 4 등분 한 후에 오른쪽으로 돌려서 다시 저장{
+        int[] map01 = new int[M / 2];
         for (int k = 0; k < N/2; k++) {
-            map01[k] = Arrays.copyOfRange(map[k], 0, M / 2);
-            map02[k] = Arrays.copyOfRange(map[k], M/2, M);
-            map03[k] = Arrays.copyOfRange(map[k + N/2], M / 2, M);
-            map04[k] = Arrays.copyOfRange(map[k + N/2], 0, M / 2);
-            
+            map01 = Arrays.copyOfRange(map[k], 0, M / 2);
             for (int s = 0; s < M / 2; s++) {
-                map[k][s] = map02[k][s];
-                map[k][s + M / 2] = map03[k][s];
-                map[k + N / 2][s] = map01[k][s];
-                map[k + N / 2][s + M / 2] = map04[k][s];
+                map[k][s] = map[k][s+M/2];
+                map[k][s + M / 2] = map[k+N/2][s+M/2];
+                map[k + N / 2][s+M/2] = map[k+N/2][s];
+                map[k + N / 2][s] = map01[s];
             }
         }
     }
     
     /**
-     * get commands one by one and run function
+     * get commands one by one and call functions
      */
     public static void getCommandAndRun() {
         for(int k = 0 ; k < T ; k ++){
@@ -187,6 +177,7 @@ public class boj16935 {
             commands[k] = Integer.parseInt(st.nextToken());
         
     }
+
     public static void main(String args[]) throws IOException {
         input();
         getCommandAndRun();
