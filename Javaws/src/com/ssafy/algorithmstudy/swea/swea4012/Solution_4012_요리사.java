@@ -9,7 +9,7 @@ public class Solution_4012_요리사 {
     public static int _sumMin = Integer.MAX_VALUE;
     public static int _totalSum = 0;
     /**
-     * teams 에 있는 인원들의 능력치를 계산하여 return
+     * teams 에 있는 재료들의 능력치를 계산하여 return
      * @param stats
      * @param teams
      * @param n
@@ -18,11 +18,11 @@ public class Solution_4012_요리사 {
     public static int calcTotalStatDiff(int stats[][], boolean[] teams, int n) {
         int team1Sum = 0;
         int team2Sum = 0;
-        /* k 인원이 팀에 속해 있는 경우 */
+        /* k 만큼 재료가 이 팀에 속해 있는 경우 */
         for (int k = 0; k < n - 1; k++) {
             // 1팀 : true 인 팀들
             if (teams[k] == true) {
-                /* k 보다 번호가 높은 인원들과의 스탯을 모두 더함 */
+                /* k 보다 번호가 높은 재료들과의 스탯을 모두 더함 */
                 for (int s = k + 1; s < n; s++) {
                     if (teams[s])
                         team1Sum += stats[k][s] + stats[s][k];
@@ -50,7 +50,7 @@ public class Solution_4012_요리사 {
      */
     public static void teamUp(int stats[][], boolean[] teams, int n, int curr, int teamMemberCount) {
 
-        /* 상대팀과의 스탯 차이 계산 */
+        /* 다른 조합과의 맛 차이 계산 */
         int statDiff = calcTotalStatDiff(stats, teams, n);
 
         // System.out.println(" statDiff : " + statDiff);
@@ -61,10 +61,10 @@ public class Solution_4012_요리사 {
             _sumMin = Math.min(_sumMin, statDiff);
             return;
         }
-        /* 인원을 한명 더 추가해서 teamUp을 호출 */
+        /* 재료을 하나 더 추가해서 teamUp을 호출 */
         for (int k = curr + 1; k < n; k++) {
             // 넘겨주기 위한 새로운 팀 복사
-            // 해당하는 멤버 추가
+            // 해당하는 재료 추가
             teams[k] = true;
             // 함수 호출
             teamUp(stats, teams, n, k, teamMemberCount + 1);
@@ -89,7 +89,7 @@ public class Solution_4012_요리사 {
             st = new StringTokenizer(bf.readLine());
             /* Input 받는 코드 */
             int n = Integer.parseInt(st.nextToken());
-            /* stats 을 저장하는 배열 */
+            /* 맛을 저장하는 배열 */
             int[][] stats = new int[n][n];
 
             /* input stats! */
@@ -102,7 +102,7 @@ public class Solution_4012_요리사 {
             }
             boolean[] teams = new boolean[n];
 
-            /* 0번째 인원 추가 */
+            /* 0번째 재료 추가 */
             teams[0] = true;
             _sumMin = Integer.MAX_VALUE;
             teamUp(stats, teams, n, 0, 1);
