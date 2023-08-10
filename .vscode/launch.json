@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main_17406_배열_돌리기_4",
+      "request": "launch",
+      "mainClass": "com.ssafy.algorithmstudy.boj.boj17406.Main_17406_배열_돌리기_4",
+      "projectName": "src"
+    },
+    {
+      "type": "java",
       "name": "Solution_5215_햄버거_다이어트",
       "request": "launch",
       "mainClass": "com.ssafy.algorithmstudy.swea.swea5215.Solution_5215_햄버거_다이어트",
