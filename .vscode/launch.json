@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Solution_5215_햄버거_다이어트",
+      "request": "launch",
+      "mainClass": "com.ssafy.algorithmstudy.swea.swea5215.Solution_5215_햄버거_다이어트",
+      "projectName": "src"
+    },
+    {
+      "type": "java",
+      "name": "Solution_6808_규영이와_인영이의_카드게임",
+      "request": "launch",
+      "mainClass": "com.ssafy.algorithmstudy.swea.swea6808.Solution_6808_규영이와_인영이의_카드게임",
+      "projectName": "src"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/kwanwoo/Desktop/2023/AlgorithmSolves/C++/2023-1/Silver",
+      "program": "/Users/kwanwoo/Desktop/2023/AlgorithmSolves/C++/2023-1/Silver/build/Debug/outDebug"
+    }
+  ]
+}
