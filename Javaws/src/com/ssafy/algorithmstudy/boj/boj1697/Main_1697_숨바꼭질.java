@@ -58,3 +58,7 @@ public class Main_1697_숨바꼭질 {
     public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     public static StringTokenizer st;
 }
+//유니온 파인드
+//        / 힙
+/// 크루스칼
+/// 프림
