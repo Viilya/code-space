@@ -2,7 +2,6 @@ package com.ssafy.algorithmstudy.swea.swea1767;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution_1767_프로세서연결하기 {
@@ -60,9 +59,7 @@ public class Solution_1767_프로세서연결하기 {
                 if(len != 0) {
                     makeLine(cnt + 1, lineLen + len, coreCount + 1);
                     cut(arr.get(cnt), d);
-                    for(int k = 0 ; k < N ; k++) {
-                        System.out.println(Arrays.toString(map[k]));
-                    }
+
                 }
             }
             makeLine(cnt + 1, lineLen, coreCount);
@@ -86,9 +83,11 @@ public class Solution_1767_프로세서연결하기 {
                 return count;
             }
             if(map[X][Y] != 0) {
-                X-= dx[d];
+                X -= dx[d];
                 Y -= dy[d];
-                while(X != c.x && Y!= c.y){
+                while(true){
+                    if(map[X][Y] == 1)
+                        break;
                     map[X][Y] = 0;
                     X -= dx[d];
                     Y -= dy[d];
