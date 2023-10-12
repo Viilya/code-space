@@ -44,7 +44,6 @@ public class Solution_8458_원점으로집합 {
                         if(isAllEven) {
                             break;
                         }
-
                     }
                     result ++;
                 }

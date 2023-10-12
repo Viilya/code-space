@@ -20,25 +20,25 @@ public class Solution_14510_나무높이 {
             int count =  0;
             int oneCount = 0;
             int twoCount = 0;
-            for(int k = 0 ; k < N ; k++){
+            for(int k = 0 ; k < N ; k++){ // max 나무 찾기
                 map[k] = Integer.parseInt(st.nextToken());
                 initMax = Math.max(initMax, map[k]);
             }
-            for(int k = 0 ; k < N ; k ++) {
+            for(int k = 0 ; k < N ; k ++) { // max 나무와의 차이를 계산
                 sub = initMax - map[k];
-                twoCount += sub/2;
-                if(sub%2 == 1){
+                twoCount += sub/2; // 모든 나무가 물의 양 2를 기본으로 사용
+                if(sub%2 == 1){  // 홀수인 경우 물의 양이 1인 경우는 한번 사용
                     oneCount += 1;
                 }
             }
 
-            while(true){
+            while(true){ // 물의 양을 2로 주는 경우와 1로 주는 경우의 차이가 최대한 적게 균형
                 if(twoCount - oneCount <= 1) break;
                 twoCount -= 1;
                 oneCount += 2;
             }
 
-            count = twoCount * 2 + ((oneCount - twoCount > 0)?(oneCount - twoCount - 1) * 2 + 1:0);
+            count = twoCount * 2 + ((oneCount - twoCount > 0)?(oneCount - twoCount - 1) * 2 + 1:0); // 경우 계산
 
 
 
