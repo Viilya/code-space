@@ -13,7 +13,8 @@ public class Main_17136_색종이붙이기2 {
     }
 
     public static int map[][] = new int [10][10];
-    public static int result_count = 0;
+    public static int result_count = Integer.MAX_VALUE;
+    public static int paper_glued = 0;
     public static int paper_count[] = {0, 5,5,5,5,5};
 
     public static void input() throws IOException {
@@ -29,15 +30,15 @@ public class Main_17136_색종이붙이기2 {
     }
 
     public static void comb(int curr_x, int curr_y){
-
         for(int k = curr_x; k < 10 ; k ++) {
             for (int s = 0; s < 10; s++) {
                 if (map[k][s] == 1) {
                     setSize(k, s);
+                    return;
                 }
             }
         }
-
+        result_count = Math.min(result_count, paper_glued);
     }
 
     public static void setSize(int x, int y){
@@ -45,7 +46,9 @@ public class Main_17136_색종이붙이기2 {
             if(checkGluable(x, y, k)){
                 gluePaper(x, y, k);
                 paper_count[k] --;
+                paper_glued ++;
                 comb(x, y);
+                paper_glued --;
                 paper_count[k] ++;
                 removePaper(x, y, k);
             }
@@ -67,7 +70,7 @@ public class Main_17136_색종이붙이기2 {
         System.out.println(result_count + "");
         for(int k = 0 ; k < 10 ; k ++){
             for(int s= 0 ; s< 10 ; s++){
-                System.out.print(map[k][s] + " " );
+                System.out.print(map[k][s] + " ");
             }
             System.out.println();
         }
@@ -106,7 +109,7 @@ public class Main_17136_색종이붙이기2 {
     }
 
     public static void output() throws IOException{
-        bw.write(result_count + "");
+        bw.write((result_count==Integer.MAX_VALUE?-1:result_count) + "");
         bw.flush();
     }
 
