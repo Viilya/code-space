@@ -17,6 +17,7 @@ public class Main_17471_개리맨더링_union {
 
     public static int n;
     public static int population[];
+    public static int totalPopulation = 0;
     public static int adjArr[][];
     public static int result = Integer.MAX_VALUE;
     public static void input() throws IOException {
@@ -26,6 +27,9 @@ public class Main_17471_개리맨더링_union {
         adjArr = new int[n][n];
 
         population = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        for(int k = 0 ; k < n ; k++){
+            totalPopulation += population[k];
+        }
         for(int k = 0 ; k < n ; k ++){
             st = new StringTokenizer(br.readLine());
             int count = getInteger(st.nextToken());
@@ -48,75 +52,81 @@ public class Main_17471_개리맨더링_union {
         for(int k = 0 ; k < n ; k ++){
             System.out.println(Arrays.toString(adjArr[k]));
         }
-
     }
 
     private static void solve() {
-        for(int k = 0 ; k < n ; k ++) {
-            boolean visited[] = new boolean[n];
-            visited[k] = true;
-            bfs(k, visited);
+        getCombination(0, 0);
+    }
+
+    private static void getCombination(int count, int store){
+        if(count == n){
+            calcSumDiff(store);
+        }else{
+            getCombination(count + 1, store);
+            getCombination(count + 1, (store | (1 << count)));
         }
     }
 
-    private static void bfs( int currPosition, boolean visited[]){
-        Deque<Integer> dq = new ArrayDeque<>();
+    public static int count = 0;
+    private static void calcSumDiff(int store){
+        if(checkUnionable(store) && checkUnionable((1<<(n+1)) - store - 1)){
+            int sum = 0;
+            for(int k = 0 ; k < n ; k++){
+                if(((1<<k) & store) == (1<<k)){
+                    sum += population[k];
+                }
+            }
+            result = Math.min(result, Math.abs(totalPopulation - sum - sum));
+        }
+    }
 
-        dq.offerLast(currPosition);
+    private static boolean checkUnionable(int store){
+        int parent[] = new int[n];
+        boolean isVisited[] = new boolean[n];
+        for(int k = 0 ; k < n ; k++ ){
+            parent[k] = k;
+        }
+        Deque<Integer> dq = new ArrayDeque<>();
+        int firstElement = 0;
+        for(int k = 0 ; k < n ; k ++){
+            if((store & (1<<k))== (1<<k)){
+                firstElement = k;
+                dq.offerLast(k);
+                break;
+            }
+        }
 
         while(!dq.isEmpty()){
-            int curr = dq.pollFirst();
-            visited[curr] = true;
-            calcPopulationGap(visited);
-            for(int k = 0 ; k < n ; k ++){
-                if(!visited[k] && adjArr[curr][k] == 1){
+            int currCity = dq.pollFirst();
+            for(int k = 0 ; k < n ; k++){
+                if(adjArr[currCity][k] == 1 && ((store & (1<<k))== (1<<k)) && !isVisited[k]){
+                    isVisited[k] = true;
                     dq.offerLast(k);
+                    union(parent, currCity, k);
                 }
             }
         }
 
-    }
-
-    private static void calcPopulationGap(boolean visited[]){
-        int opposite  = -1;
-        int sum1 = 0;
-        int sum2 = 0;
-        for(int k = 0 ; k < n ; k ++){
-            if(visited[k]) sum1 += population[k];
-            else {opposite = k;}
-        }
-        if(opposite == -1){
-            result = Math.min(result, sum1);
-            return;
-        }
-        boolean visitedCopy[] = Arrays.copyOf(visited, n);
-        Deque<Integer> dq = new ArrayDeque<>();
-        dq.offerLast(opposite);
-        visitedCopy[opposite]= true;
-        while(!dq.isEmpty()){
-            int curr = dq.pollFirst();
-            sum2 += population[curr];
-            for(int k = 0 ; k < n ; k ++){
-                if(adjArr[curr][k] == 1 && !visitedCopy[k]){
-                    dq.addLast(k);
-                    visitedCopy[k] = true;
-                }
+        for(int k = 0 ; k < n ; k++){
+            if( ((store & (1<<k))== (1<<k)) && parent[k] != firstElement){
+                return false;
             }
         }
-
-        int checkedCityCount = 0;
-        for(int k = 0 ; k < n ; k ++){
-            if(visitedCopy[k]) checkedCityCount ++;
-        }
-
-        if(checkedCityCount == n ){
-            System.out.println(Arrays.toString(visited));
-            System.out.println(sum1 + " " + sum2 + " = " + Math.abs(sum1 - sum2));
-            result = Math.min(result, Math.abs(sum1 - sum2));
-        }
-
+        return true;
     }
 
+    private static void union(int parent[], int a, int b){
+        if(findParent(parent, a) < findParent(parent, b)){
+            parent[b] = parent[a];} else{
+                    parent[a] = parent[b];}
+    }
+
+    private static int findParent(int parent[], int child){
+        if(parent[child] == child){
+            return child;
+        }
+        return parent[child] = findParent(parent, parent[child]);
+    }
 
     private static void output() throws IOException{
         bw.write((result==Integer.MAX_VALUE?-1:result)+ "");
