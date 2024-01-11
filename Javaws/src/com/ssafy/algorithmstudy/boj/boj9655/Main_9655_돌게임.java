@@ -7,11 +7,9 @@ public class Main_9655_돌게임 {
         Scanner sc= new Scanner(System.in);
         int a = sc.nextInt();
 
-        if(a < 4){
-            System.out.println("SK");
-        }else{
-            if(a % 2 == 0) {System.out.println("CY");}
-            else{ System.out.println("SK");}
-        }
+
+        if(a % 2 == 0) {System.out.println("CY");}
+        else{ System.out.println("SK");}
+
     }
 }
