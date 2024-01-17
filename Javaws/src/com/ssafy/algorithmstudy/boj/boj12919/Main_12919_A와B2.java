@@ -47,7 +47,7 @@ public class Main_12919_A와B2 {
     }
 
     private static boolean checkAvailableByBFS() {
-
+                    
         Deque<Node> dq = new ArrayDeque<>();
 
         dq.offerLast(new Node(sb1, bDiffCount%2==1));
