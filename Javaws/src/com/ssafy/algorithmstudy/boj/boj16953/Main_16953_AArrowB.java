@@ -16,15 +16,15 @@ public class Main_16953_AArrowB {
 
     public static void input() throws IOException {
         st=  new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
+        long N = Long.parseLong(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         bfs(N, M);
 
     }
     static class Point{
-        int num;
+        long num;
 
-        public Point(int num, int count) {
+        public Point(long num, int count) {
             this.num = num;
             this.count = count;
         }
@@ -33,9 +33,8 @@ public class Main_16953_AArrowB {
 
 
     }
-    private static void bfs(int n, int m) {
+    private static void bfs(long n, int m) {
         Queue<Point> q = new ArrayDeque<>();
-        int half = m/2;
         q.add(new Point(n, 0));
         while(!q.isEmpty()){
             Point c = q.poll();
@@ -45,7 +44,10 @@ public class Main_16953_AArrowB {
                 ans = c.count;
                 return;
             }
-            if(c.num > half) continue;
+
+            if(c.num > m){
+                continue;
+            }
 
             q.add(new Point(c.num * 2, c.count + 1));
             q.add(new Point(c.num * 10 + 1, c.count + 1));
