@@ -1,7 +1,7 @@
 package com.ssafy.algorithmstudy.boj.boj1197;
 
 import java.io.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -40,20 +40,20 @@ public class Main_1197_최소스패닝트리 {
     public static int VERTEX;
     public static int EDGE;
 
-    public static LinkedList<Node> GRAPH[];
+    public static ArrayList<Node> GRAPH[];
     public static int PARENTS[];
     public static int RESULT = 0;
     public static void input() throws IOException{
         st = new StringTokenizer(br.readLine());
         VERTEX = Integer.parseInt(st.nextToken());
         EDGE = Integer.parseInt(st.nextToken());
-        GRAPH = new LinkedList[VERTEX + 1];
+        GRAPH = new ArrayList[VERTEX + 1];
         PARENTS = new int[VERTEX + 1];
 
         // 정점 기반 초기 실행
         for(int k = 0 ; k < VERTEX + 1; k ++) {
             PARENTS[k] = k;
-            GRAPH[k] = new LinkedList<Node>();
+            GRAPH[k] = new ArrayList<Node>();
         }
         // 간선 입력 받기
         for(int k = 0 ; k < EDGE ; k ++){
