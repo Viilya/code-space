@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/kwanwoo/Desktop/2023/AlgorithmSolves/C++/2023-1",
+      "program": "/Users/kwanwoo/Desktop/2023/AlgorithmSolves/C++/2023-1/build/Debug/outDebug"
+    }
+  ]
+}
