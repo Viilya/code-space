@@ -64,10 +64,7 @@ public class Main_1197_최소스패닝트리 {
             GRAPH[a].add(new Node(a, b, c));
             GRAPH[b].add(new Node(b, a, c));
         }
-
-
     }
-
     public static void solve(){
         PriorityQueue<Node> pq = new PriorityQueue<Node>();
 
