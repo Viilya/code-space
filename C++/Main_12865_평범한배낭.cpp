@@ -73,22 +73,24 @@ void solve()
             int currStuffNumber = currStuff.index;
             int currSumWeight = currStuff.weight;
             int currSumValue = currStuff.value;
-            // cout << currStuffNumber << " " << currSumWeight << " " << currSumValue << "\n";
+//            cout << "#####################################\n";
+//             cout << currStuffNumber << " " << currSumWeight << " " << currSumValue << "\n";
             for (int s = currStuffNumber + 1; s < N; s++)
             {
 
                 int sum = currSumWeight + stuff[s][1];
-                // cout << sum << " \n";
+//                 cout << "sum : " << sum << " \n";
                 if (currSumWeight + stuff[s][1] > K)
                     continue;
 
                 int val = currSumValue + stuff[s][0];
-                // cout << val << " \n";
+//                 cout << "val : " << val << " \n";
                 if (dp[sum] < val)
                 {
                     dp[sum] = val;
-                    v.push(Stuff(s, val, sum));
                 }
+                v.push(Stuff(s, val, sum));
+//                cout << " -----------------\n ";
             }
         }
     }
