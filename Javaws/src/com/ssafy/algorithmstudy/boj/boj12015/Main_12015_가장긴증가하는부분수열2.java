@@ -30,17 +30,30 @@ public class Main_12015_가장긴증가하는부분수열2 {
                 arr[last] = a;
             }
             else{
-                for(int s = 0 ; s <= last; s++){
-                    if(arr[s] >= a ) {
-                        arr[s] = a;
-                        break;
-                    }
-                }
+                int idx = search(a, last);
+                arr[idx] = a;
             }
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
         }
         output(last);
     }
+
+    public static int search(int a, int last){
+        int start = 0;
+        int end= last;
+        while(start < end){
+            int mid = start + (end - start) / 2;
+            if(arr[mid] >= a){
+                end = mid;
+            }else{
+                start = mid + 1;
+            }
+        }
+
+        return end;
+    }
+
+
 
     public static void output(int last) throws IOException{
         bw.write((last+1) + "");
