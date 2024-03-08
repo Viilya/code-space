@@ -4,44 +4,60 @@
 
 using namespace std;
 
-vector<vector<int>> MAP(15, vector<int>(15, 0));
+vector<int> MAP(15, 0);
 int N;
 int RESULT;
 
-void input() {
+void input()
+{
     cin >> N;
 }
 
-void backTracking(int x, int y, int count){
-    int s = y;
-    for(int k = 0 ; k < N ; k ++){
-        for(; s < N; s++){
-
+bool isValid(int a)
+{
+    for (int k = 0; k < a; k++)
+    {
+        if (MAP[k] == MAP[a] || abs(MAP[a] - MAP[k]) == a - k)
+        {
+            return false;
         }
-        s = 0;
+    }
+    return true;
+}
+
+void nQueen(int a)
+{
+    if (a == N)
+    {
+        RESULT++;
+    }
+    else
+    {
+        for (int k = 0; k < N; k++)
+        {
+            MAP[a] = k;
+            if (isValid(a))
+            {
+                nQueen(a + 1);
+            }
+        }
     }
 }
 
-
-void solve(){
-    for(int k = 0 ; k < N ; k ++){
-        for(int s = 0 ; s< N ; s++){
-            MAP[k][s] = 1;
-            backTracking(k, s, 1);
-            MAP[k][s] = 0;
-        }
-    }
+void solve()
+{
+    nQueen(0);
 }
 
-void output(){
+void output()
+{
     cout << RESULT << "\n";
 }
 
-int main(void){
+int main(void)
+{
     FIO;
     input();
     solve();
     output();
 }
-
-
