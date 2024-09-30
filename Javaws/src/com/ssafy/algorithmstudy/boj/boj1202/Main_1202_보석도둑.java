@@ -1,8 +1,7 @@
 package com.ssafy.algorithmstudy.boj.boj1202;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * 보석 N개 (1 < N , K < 300,000)
@@ -15,36 +14,38 @@ import java.util.StringTokenizer;
 
 public class Main_1202_보석도둑 {
 
-    static class Gems implements Comparable<Gems> {
+    static class Gem implements Comparable<Gem> {
         int weight;
-        int price;
+        int value;
 
-        public Gems(){}
-        public Gems(int w, int p){
+        public Gem(){}
+        public Gem(int w, int p){
             this.weight = w;
-            this.price = p;
+            this.value = p;
         }
 
         @Override
-        public int compareTo(Gems o) {
-            if(o.price == this.price){
-                return this.weight - o.weight;
+        public int compareTo(Gem o) {
+            if(o.weight == this.weight){
+                return o.value - this.value;
             }
-            return o.price - this.price;
+            return this.weight - o.weight;
         }
 
         @Override
         public String toString(){
-            return "[" + this.price + ", " + this.weight + "]";
+            return "[" + this.value + ", " + this.weight + "]";
         }
     }
 
 
     public static int MAX_GEM = 300000;
     public static int MAX_BAG = 300000;
-    public static int N, K;
-    public static int bagWeight[];
-    public static Gems gems[];
+    public static int N, K; // N : 보석 개수  K : 가방 개수
+    public static int bagList[]; // 가방 무게 저장
+    public static Gem gemList[]; // 보석 저장
+    public static Queue<Integer> tempbagList = new LinkedList<>();
+    public static long valueSum = 0;
 
     public static void main(String [] args) throws IOException {
         input();
@@ -56,30 +57,50 @@ public class Main_1202_보석도둑 {
         st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
-        gems = new Gems[N];
-        bagWeight = new int[K];
+        gemList = new Gem[N];
+        bagList = new int[K];
         for(int k = 0 ; k < N ; k ++) {
             st = new StringTokenizer(br.readLine());
-            gems[k] = new Gems(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+            gemList[k] = new Gem(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
         }
         for(int k = 0 ; k < K ; k ++){
-            bagWeight[k] = Integer.parseInt(br.readLine());
+            bagList[k] = Integer.parseInt(br.readLine());
         }
 
-        Arrays.sort(gems);
-        Arrays.sort(bagWeight);
-        System.out.println(Arrays.toString(gems));
+        Arrays.sort(gemList);
+        Arrays.sort(bagList);
+//        System.out.println(Arrays.toString(gemList));
     }
 
     public static void solve() {
-        for(int k = 0; k < N ; k ++){
 
+
+        PriorityQueue<Gem> availableGems = new PriorityQueue<Gem>((Comparator.comparingInt(o -> -o.value)));
+        int gemIndex = 0;
+        
+        
+        // bagList 순회
+        for(int k = 0; k < K ; k ++){
+            
+            
+            // k 번째 가방에 넣을 수 있는 보석 전부 pq에 저장 
+            while(gemIndex < N && gemList[gemIndex].weight <= bagList[k]){
+
+                // pq에 저장 후 index 1 증가
+                availableGems.add(gemList[gemIndex++]);
+            }
+
+//            System.out.println(availableGems.toString());
+            // gems 저장 pq null 확인
+            if(!availableGems.isEmpty()){
+                valueSum += availableGems.poll().value;
+            }
         }
     }
 
     public static void output() throws IOException {
-        bw.write("");
+        bw.write("" + valueSum);
         bw.flush();
         bw.close();
     }
