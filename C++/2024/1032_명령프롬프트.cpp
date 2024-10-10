@@ -18,7 +18,7 @@ int main() {
     
     char c;
     
-    for(int i = 0; i < str[0].length(); i++){
+    for(int i = 0; i < int(str[0].length()); i++){
         c = str[0][i];
         for(int j=0; j<n; j++){
             if(c != str[j][i]){
