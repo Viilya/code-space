@@ -4,3 +4,6 @@
 **/.DS_Store
 **/.*
 **/*.class
+**/node_modules
+**/package.json
+**/package-lock.json
